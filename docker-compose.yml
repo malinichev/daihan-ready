@@ -1,0 +1,12 @@
+version: '3'
+services: 
+    usetable:
+        container_name: usetableandgsap
+        restart: always
+        build: .
+        ports:
+            - "5555:80"
+            - "443:443"
+        volumes:
+            - /etc/letsencrypt/:/etc/letsencrypt/
+       
