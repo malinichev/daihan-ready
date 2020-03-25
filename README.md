@@ -15,11 +15,16 @@
 
 
 В этом проекте я использовал следующие блиотеки npm :
-**+Для получения всех категорий и обьектов в них**  https://react24.site:2222/api </br>
+</br>
 **+ React-Redux**
+</br>
 **+ GSAP - GreenSock**
+</br>
 **+ Axios**
+</br>
 **+ Bootstrap-react**
+</br>
 **+ Classname**
+</br>
 **+ slick-carousel**
 
