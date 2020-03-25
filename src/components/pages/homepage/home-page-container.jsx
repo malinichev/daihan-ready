@@ -1,75 +1,45 @@
-
-
 import React from 'react';
-import HomePage from './home-page';
-import UserInfo from '../../user-info';
 import { connect } from 'react-redux';
-import { setSelectedUserinState, delOnePost} from '../../../redux/homepage-reduser';
-import {sendUpdatePost} from '../../../redux/editpage-reduser';
-import preloader from './Ellipsis200.svg'
+import Homepage from './home-page'
+import {Loading} from '../../common/svg-icon/svg-icon'
+import {delOneHPSlider1} from '../../../redux/homepage-reduser'
+import {setIsIndex} from '../../../redux/app-reduser';
+import {getCatalogAndItems}  from '../../../redux/catalog-selector'
 
-class HomePageContainerApi extends React.PureComponent {
-
-    // shouldComponentUpdate(nextProps, nextState){
-    //   return nextProps !== this.props || nextState !== this.state;
-    // }
-
+class HomePageContainer extends React.PureComponent {
+    componentDidMount(){
+        this.props.setIsIndex(true);
+    }
     render(){
-      const selectedUser = (name,id) =>{
-        this.props.setSelectedUserinState(name,id);
-      }
-      const delPost = (id) =>{
-        this.props.delOnePost(id);
-      }
-      
-      
-      if(!!this.props.posts.length && this.props.posts.length > 0 ){
-        return(
-          <>
-            <UserInfo users={this.props.users} 
-                      selectUserName={this.props.selectedUsers} 
-                      selectedUser={selectedUser}
-                      />
-            <HomePage posts={this.props.posts.filter( el => 
-                              this.props.selectedUsers.userId ? 
-                              el.userId === this.props.selectedUsers.userId 
-                              : el.userId
-                            )}
-                            delPost={delPost} 
-                      />
-          </>
-            
-        );
-      }else{
-       return( 
-        <>
-          <div style={
-              {display: 'flex',
-              justifyContent: 'center',
-              alignContent: 'center',
-              height: '100vh'}
-                      }>
-                        <img src={preloader} alt='preloader' />
-          </div>
-        </>
-        );
-      } 
+        
+     
+        if(this.props.isItemsLoad){
+            return (
+                <>
+                    <Homepage {...this.props} />
+                </>
+            );
+        }else{
+            return (
+            <>
+                <div ><Loading/></div>
+            </>
+            );
+        }
+    
     }
 }
 
 const mapStateToProps = (state /*, ownProps*/) => {
     return {
-      posts: state.homepage.posts,
-      users: state.homepage.users,
-      selectedUsers: state.homepage.selectedUser,
-      isDataLoad: state.homepage.isLoad,
-      isPostUpdate: state.editPage.isPostUpdate
+        isSlider1Load: state.homepage.isSlider1Load,
+        hpSliderItems: state.homepage.hpSliderItems,
+        isItemsLoad: state.catalogAdnItems.isItemsLoad,
+        isError: state.app.isError,
+        isLogIn: state.auth.isLogIn,
+        items: getCatalogAndItems(state)
     }
   }
-
-
-const HomePageContainer = connect(mapStateToProps,{sendUpdatePost,delOnePost, setSelectedUserinState})(HomePageContainerApi)
-
-
-
-export default HomePageContainer
+  
+  
+  export default connect(mapStateToProps,{delOneHPSlider1, setIsIndex })(HomePageContainer)

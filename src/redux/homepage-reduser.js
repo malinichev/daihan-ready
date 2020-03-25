@@ -1,89 +1,67 @@
-import {getPostApi, getUsersApi,delPostApi, updatePostApi} from '../api';
-import {postIsSend} from './editpage-reduser';
+import {homepageSlider1Api, getHomePageSliderItemApi} from '../api';
+
 import {stopSubmit} from 'redux-form';
+import {isDataLoad} from './app-reduser';
 
 
 
-const IS_DATA_LOAD = 'IS_DATA_LOAD';
-const SET_POST = 'SET_POST';
-const SET_USER = 'SET_USER';
-const SELECT_USER = 'SELECT_USER';
-const UPDATE_POST = 'UPDATE_POST';
-const DEL_POST = 'DEL_POST';
-const ADD_POST = 'ADD_POST';
-const IS_ERROR = 'IS_ERROR';
+const DEL_SLIDER1 = 'homepage/DEL_SLIDER1';
+const UPDATE_ONE_1SLIDER = 'homepage/UPDATE_ONE_1SLIDER';
+const IS_SLIDER1_LOAD = 'homepage/IS_SLIDER1_LOAD';
+const SET_HOMEPAGE_SLIDER_ITEMS = 'homepage/SET_HOMEPAGE_SLIDER_ITEMS';
+const IS_ERROR_HOMEPAGE = 'homepage/IS_ERROR';
+const SET_ONE_TITLE_SLIDER = 'homepage/SET_ONE_TITLE_SLIDER';
 
 
 const initState = {
     
         
-        posts:[],
-        users:[],
-        isLoad:false,
-        selectedUser:{
-            userName: 'Select User',
-            userId: null
-        },
-        isError:false
+    
+    isSlider1Load:false,
+    isErrorHP:false,
+    hpSliderItems:[],
         
     
 };
 
 const homepageReduser = (state = initState, action) => {
     switch (action.type) {
+        case SET_ONE_TITLE_SLIDER:
+            return {
+                ...state,
+                ...state.hpSliderItems,
+                hpSliderItems: [...state.hpSliderItems, action.hpSliderItems]
+            }
+        case UPDATE_ONE_1SLIDER:
+            // let idX = state.hpSliderItems.findIndex(el=>el.id===action.updateDataItem.id)
+            return {
+                state,
+                // ...state.hpSliderItems,
+                // hpSliderItems: [...state.hpSliderItems.slice(0, idX),action.updateDataItem, ...state.hpSliderItems.slice(idX + 1)]
+            }
        
-        case IS_DATA_LOAD:
-            return {
-                ...state,
-                isLoad: action.isDataLoad  
-            };
-        case IS_ERROR:
-            return {
-                ...state,
-                isLoad: false,
-                isError: action.err  
-            };
-        case SET_POST:
-            return {
-                ...state,
-                ...state.posts,
-                posts: [...action.posts]
-            };
-        case UPDATE_POST:{
-            let idX = state.posts.findIndex(el=>el.id===action.post.id)
+        case IS_SLIDER1_LOAD:
             
             return {
                 ...state,
-                ...state.posts,
-                posts: [...state.posts.slice(0, idX), action.post, ...state.posts.slice(idX + 1)]
-            }
-        }
-        case DEL_POST:{
-            let idXDel = state.posts.findIndex(el=>el.id===action.postId)
-            return {
-                ...state,
-                ...state.posts,
-                posts: [...state.posts.slice(0, idXDel), ...state.posts.slice(idXDel + 1)]
-            }
-        }
-        case ADD_POST:{
-            return {
-                ...state,
-                ...state.posts,
-                posts: [...state.posts, action.postData]
-            }
-        }
-        case SET_USER:
-            return {
-                ...state,
-                ...state.users,
-                users: [...action.users]
+                isSlider1Load: action.isSlider1Load  
             };
-        case SELECT_USER:
+        case IS_ERROR_HOMEPAGE:
             return {
                 ...state,
-                ...state.selectedUser,
-                selectedUser: action.selectedUser
+                isLoad: false,
+                isError: action.isError  
+            };
+        case SET_HOMEPAGE_SLIDER_ITEMS:
+            
+            return {
+                ...state,
+                ...state.hpSliderItems,
+                hpSliderItems: [...action.hpSliderItems]
+            };
+        case DEL_SLIDER1:
+            return {
+                state
             };
         default:
             return state;
@@ -91,123 +69,112 @@ const homepageReduser = (state = initState, action) => {
 };
 
 
-
-export const isDataLoad = (isDataLoad) => ({
-    type: IS_DATA_LOAD,
-    isDataLoad
+export const isSlider1Load = (isSlider1Load) => ({
+    type: IS_SLIDER1_LOAD,
+    isSlider1Load
 })
-export const isError = (err) => ({
-
-    type: IS_ERROR,
+export const setHpSliderItems = (hpSliderItems) => ({
+    type: SET_HOMEPAGE_SLIDER_ITEMS,
+    hpSliderItems
+})
+export const setErrorHP = (err) => ({
+    type: IS_ERROR_HOMEPAGE,
     err
 })
-export const setPost = (posts) => ({
-    type: SET_POST,
-    posts
+export const setOneTitleSlider = (hpSliderItems) => ({
+    type: SET_ONE_TITLE_SLIDER,
+    hpSliderItems
 })
-export const updatePost = (post) => ({
-    type: UPDATE_POST,
-    post
-})
-export const delPost = (postId) => ({
-    type: DEL_POST,
-    postId
-})
-export const addPost = (postData) => ({
-    type: ADD_POST,
-    postData
-})
-export const setUser = (users) => ({
-    type: SET_USER,
-    users
-})
-export const setSelectUser = (selectedUser) => ({
-    type: SELECT_USER,
-    selectedUser
+export const updateOne1Slider = () => ({
+    type: UPDATE_ONE_1SLIDER
 })
 
 
-export const updatePostData = (postData) => async  (dispatch) => {    
+
+export const updateOneHPSlider1 = (updateDataItem) => async  (dispatch) => {    
         try {
             dispatch(isDataLoad(false));
-            let res = await updatePostApi(postData)
-                dispatch(updatePost(res));
-                dispatch(postIsSend());
-                dispatch(isDataLoad(true));
+            dispatch(isSlider1Load(false));
+
+            await homepageSlider1Api.editTitleSlider(updateDataItem)
+            let hpSliderItems = await getHomePageSliderItemApi()
+
+            dispatch(setHpSliderItems(hpSliderItems))
+            dispatch(isSlider1Load(true));
+            dispatch(isDataLoad(true));
+            dispatch(setErrorHP(false));
+            
+            
+                
           } 
         catch(err) {
             let action = stopSubmit('editPostForm', {_error:'Something wrong!! Try ealse!!'});
                 dispatch(action);
-                
+                dispatch(setErrorHP(err));
                 dispatch(isDataLoad(true));
-                console.log('errrr')
+                dispatch(isSlider1Load(true));
+                console.log('errrr dell slider')
           }
 
 }  
- 
+export const delOneHPSlider1 = (idDeletedSlider) => async  (dispatch) => {    
+        try {
+            dispatch(isDataLoad(false));
+            dispatch(isSlider1Load(false));
 
-export const setSelectedUserinState = (selectedUserName,selectedUserId) => {
-    return (dispatch) => {
-        dispatch(setSelectUser({
-            userName: selectedUserName,
-            userId: selectedUserId
-        }));
+            await homepageSlider1Api.deleteTitleSlider(idDeletedSlider)
+            let hpSliderItems = await getHomePageSliderItemApi()
+
+            dispatch(setHpSliderItems(hpSliderItems))
+            dispatch(isSlider1Load(true));
+            dispatch(isDataLoad(true));
+            dispatch(setErrorHP(false));
+                
+                
+          } 
+        catch(err) {
+            let action = stopSubmit('editPostForm', {_error:'Something wrong!! Try ealse!!'});
+                dispatch(action);
+                dispatch(setErrorHP(err));
+                dispatch(isDataLoad(true));
+                dispatch(isSlider1Load(true));
+                console.log('errrr dell slider')
+          }
+
+}  
+export const setNewSlide1InHomepage= (newSliderData) => {
+    return async dispatch => {
+        try {
+            dispatch(isDataLoad(false));
+            dispatch(isSlider1Load(false));
+
+            await homepageSlider1Api.addOneNewTitleSlider(newSliderData)
+            let getSliderItemsWithNewSlideronServer = await getHomePageSliderItemApi()
+            
+            dispatch(setHpSliderItems(getSliderItemsWithNewSlideronServer))
+            dispatch(isSlider1Load(true));
+            dispatch(isDataLoad(true));
+            dispatch(setErrorHP(false));
+    
+            
+                
+        }catch(err) {
+                let action = stopSubmit('editPostForm', {_error:'Something wrong!! Try ealse!!'});
+                    dispatch(action);
+                    dispatch(setErrorHP(err));
+                    dispatch(isSlider1Load(true));
+                    dispatch(isDataLoad(true));
+                    console.log('errrr Create New slider')
+              }
+
+
         
     }
 }
 
-export const delOnePost = (postId) => async (dispatch)=>{
-    dispatch(isDataLoad(false));
 
-    let showWorn = setTimeout(() => {
-        dispatch(isError(true))
-    }, 2500)
-        try{
-                await delPostApi(postId);
-                clearTimeout(showWorn);
-                dispatch(isError(false))
-                dispatch(delPost(postId))
-                dispatch(isDataLoad(true))
 
-        }
-        catch(err){
-            dispatch(isError(true))
-            dispatch(delPost(postId))
-            dispatch(isDataLoad(true))
-            setTimeout(() => {
-                dispatch(isError(false))
-              }, 15000)
-            console.log('errrr')
-        }        
-    
-} 
 
-export const initializeApp = () => async (dispatch) => {
 
-    try{
-        let user = await getUsersApi()
-        let posts = await getPostApi()
-        dispatch(isDataLoad(false));
-        let el = await Promise.all([user,posts])
-            
-                dispatch(setPost(el[1]))
-                const Alluser = 
-                    {
-                        id: null,
-                        name: "Select All",
-                    }
-                el[0].push(Alluser)
-                dispatch(setUser(el[0]))
-
-                dispatch(isDataLoad(true)) 
-                // console.log(el)
-    }catch(err){
-        console.log('errrr')
-    }
-        
-            
-            
-    
-}
 
 export default homepageReduser
