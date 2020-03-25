@@ -15,10 +15,10 @@
 
 
 В этом проекте я использовал следующие блиотеки npm :
-**+ React-Redux**
-**+ GSAP - GreenSock**
-**+ Axios**
-**+ Bootstrap-react**
-**+ Classname**
-**+ slick-carousel**
+** React-Redux**
+** GSAP - GreenSock**
+** Axios**
+** Bootstrap-react**
+** Classname**
+** slick-carousel**
 
