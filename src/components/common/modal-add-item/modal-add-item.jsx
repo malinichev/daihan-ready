@@ -32,7 +32,7 @@ const FormAddItem = (props) =>{
                         className="form-control" 
                         type="text" 
                         name='dummyItem.label'
-                        placeholder="label"
+                        placeholder="Type without space"
                         component={'input'}
                         />
 

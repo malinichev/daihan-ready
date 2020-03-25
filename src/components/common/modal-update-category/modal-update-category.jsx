@@ -36,7 +36,7 @@ const FormUpdateCategory = (props) =>{
                         className="form-control" 
                         type="text" 
                         name='name'
-                        placeholder="name"
+                        placeholder="Type without space"
                         component={'input'}
                         />
 
@@ -47,7 +47,7 @@ const FormUpdateCategory = (props) =>{
                         className="form-control" 
                         type="text" 
                         name='categoryName'
-                        placeholder="categoryName"
+                        placeholder="Type without space"
                         component={'input'}
                         />
 

@@ -26,7 +26,7 @@ const FormAddCategory = (props) =>{
                         className="form-control" 
                         type="text" 
                         name='name'
-                        placeholder="name"
+                        placeholder="Type without space"
                         component={'input'}
                         />
 
@@ -37,7 +37,7 @@ const FormAddCategory = (props) =>{
                         className="form-control" 
                         type="text" 
                         name='categoryName'
-                        placeholder="name"
+                        placeholder="Type without space"
                         component={'input'}
                         />
 
