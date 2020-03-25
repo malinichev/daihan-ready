@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/react-redux/static/css/main.cf8f10e8.chunk.css",
+    "main.js": "/react-redux/static/js/main.b3f73218.chunk.js",
+    "main.js.map": "/react-redux/static/js/main.b3f73218.chunk.js.map",
+    "runtime-main.js": "/react-redux/static/js/runtime-main.922c54c2.js",
+    "runtime-main.js.map": "/react-redux/static/js/runtime-main.922c54c2.js.map",
+    "static/css/2.288f30ff.chunk.css": "/react-redux/static/css/2.288f30ff.chunk.css",
+    "static/js/2.f38570ec.chunk.js": "/react-redux/static/js/2.f38570ec.chunk.js",
+    "static/js/2.f38570ec.chunk.js.map": "/react-redux/static/js/2.f38570ec.chunk.js.map",
+    "index.html": "/react-redux/index.html",
+    "precache-manifest.58d6445bb7aa69f154a15f70d96cf715.js": "/react-redux/precache-manifest.58d6445bb7aa69f154a15f70d96cf715.js",
+    "service-worker.js": "/react-redux/service-worker.js",
+    "static/css/2.288f30ff.chunk.css.map": "/react-redux/static/css/2.288f30ff.chunk.css.map",
+    "static/css/main.cf8f10e8.chunk.css.map": "/react-redux/static/css/main.cf8f10e8.chunk.css.map",
+    "static/js/2.f38570ec.chunk.js.LICENSE.txt": "/react-redux/static/js/2.f38570ec.chunk.js.LICENSE.txt",
+    "static/media/slider1.scss": "/react-redux/static/media/Arrow.a09a6b21.svg",
+    "static/media/about-page-bgTop.jpg": "/react-redux/static/media/about-page-bgTop.a8206dc9.jpg",
+    "static/media/ant-rozetsky1.jpg": "/react-redux/static/media/ant-rozetsky1.6302c1bb.jpg",
+    "static/media/ant-rozetsky2.jpg": "/react-redux/static/media/ant-rozetsky2.e2d2aced.jpg",
+    "static/media/contact-page-imMap.jpg": "/react-redux/static/media/contact-page-imMap.0abfe3e1.jpg",
+    "static/media/slick-theme.css": "/react-redux/static/media/slick.f97e3bbf.svg",
+    "static/media/slidAb.jpg": "/react-redux/static/media/slidAb.5bc83e29.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.922c54c2.js",
+    "static/css/2.288f30ff.chunk.css",
+    "static/js/2.f38570ec.chunk.js",
+    "static/css/main.cf8f10e8.chunk.css",
+    "static/js/main.b3f73218.chunk.js"
+  ]
+}
