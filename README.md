@@ -10,8 +10,8 @@
 Для редактирования нужно войти или заргистрировтся
 
 Чтоб войти используйте:
-    login: demo@mail.ru
-    password: demo
+    login: **demo@mail.ru**
+    password: **demo**
 
 На странице https://react24.site/react-redux/#/catalog
 
