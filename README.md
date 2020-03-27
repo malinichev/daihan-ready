@@ -9,9 +9,9 @@
 
 Для редактирования нужно войти или заргистрировтся
 
-Чтоб войти используйте:
-    login: **demo@mail.ru**
-    password: **demo**
+Чтоб войти используйте:</br>
+    login: **demo@mail.ru**</br>
+    password: **demo**</br>
 
 На странице https://react24.site/react-redux/#/catalog
 
